@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import 'myscript/dist/myscript.min.css';
 import Main from "./Main";
 import Lessons from "./Lessons";
 import Lesson from "./Lesson";
 import './App.css';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
