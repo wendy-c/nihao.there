@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { ImpactfulHeader, Background } from './styles';
 import styled from "styled-components";
+import * as logoUrl from "./assets/nihaothere.png";
 
 const Button = styled.span`
   display: block;
@@ -38,7 +39,7 @@ export default class Home extends Component {
     return (
       <div className="home-container">
         <Container>
-          <img style={{ maxWidth: "300px" }} src="./assets/nihaothere.png" />
+          <img style={{ maxWidth: "300px" }} src={logoUrl} />
           <Button><Link to="/lessons">Begin Lessons</Link></Button>
         </Container>
         <Footer>
