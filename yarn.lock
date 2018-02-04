@@ -4553,9 +4553,9 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-myscript@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/myscript/-/myscript-4.1.0.tgz#90cad7f60f2cd4de5092116a0fa000f232a06088"
+"myscript@git://github.com/MyScript/MyScriptJS.git#FIX-package":
+  version "4.0.1"
+  resolved "git://github.com/MyScript/MyScriptJS.git#f4f0e43f92044d842d9abefc59b21ae9148d69b9"
   dependencies:
     assign-deep "^0.4.6"
     clipboard "^1.7.1"
