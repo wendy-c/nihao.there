@@ -43,7 +43,7 @@ export default class Home extends Component {
           <Footer>
           <Background color='red'>
           <ImpactfulHeader>
-            <h1>Ni hao!</h1>
+            <div><h1>Ni hao!</h1></div>
             <div><h2>你 好！</h2></div>
           </ImpactfulHeader>
         </Background>
