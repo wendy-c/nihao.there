@@ -12,11 +12,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Ni hao! </h1>
-          <h2 className="App-title">你 好！</h2>
-        </header>
-
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home}/>
