@@ -67,6 +67,15 @@ const Button = styled.span`
   }
 `;
 
+const PlayContainer = styled.div`
+  font-size: 0.6em;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-right: 1rem;
+`;
+
 class Lesson extends Component {
   state = {
     currentLevel: 0,
@@ -121,12 +130,9 @@ class Lesson extends Component {
         exportedIsAnswer(exports);
       }
     });
-
-
   }
 
   handleClick = event => {
-    
     // go to next level
     this.setState(state => ({
       currentLevel: ++state.currentLevel,
@@ -158,6 +164,10 @@ class Lesson extends Component {
     editorElement.editor.redo();
   };
 
+  playAudio = event => {
+    event.target.firstChild.play();
+  };
+
   render() {
     const editorStyle = {
       minWidth: "500px",
@@ -182,10 +192,39 @@ class Lesson extends Component {
         </h2>
         <CharacterContainer>
           <div style={{ paddingRight: "2em" }}>
-            <div style={{fontSize: "1.5em"}}>{lessonData.levels[currentLevel].chi}</div>
-            <div style={{fontSize: "1.5em"}}>{lessonData.levels[currentLevel].eng}</div>
+            <div style={{ fontSize: "1.5em" }}>
+              {lessonData.levels[currentLevel].chi}
+            </div>
+            <div style={{ fontSize: "1.5em" }}>
+              {lessonData.levels[currentLevel].eng}
+            </div>
           </div>
-          <div style={{ paddingLeft: "2em" }}>
+          <div style={{ paddingLeft: "2em", display: "flex" }}>
+            <PlayContainer>
+              <div>
+                <span>Cantonese</span>
+                <i
+                  className="fas fa-play-circle"
+                  style={{ fontSize: "1.5em" }}
+                  onClick={this.playAudio}
+                >
+                  <audio src={lessonData.levels[currentLevel].audio[0]} />
+                </i>
+              </div>
+              <div>
+                <span>Mandarin</span>
+                <i
+                  className="fas fa-play-circle"
+                  style={{ fontSize: "1.5em" }}
+                  onClick={this.playAudio}
+                >
+                  <audio
+                    src={lessonData.levels[currentLevel].audio[1]}
+                    onClick={this.playAudio}
+                  />
+                </i>
+              </div>
+            </PlayContainer>
             {lessonData.levels[currentLevel].gif.map(char => {
               return (
                 <img src={char} style={{ width: "50px", height: "50px" }} />
@@ -201,7 +240,10 @@ class Lesson extends Component {
             <i className="fas fa-undo" />
             <span style={{ fontSize: "0.6em" }}>Undo</span>
           </FlexColumn>
-          <FlexColumn style={{ paddingLeft: "12rem" }} onClick={this.handleRedo}>
+          <FlexColumn
+            style={{ paddingLeft: "12rem" }}
+            onClick={this.handleRedo}
+          >
             <i className="fas fa-redo" />
             <span style={{ fontSize: "0.6em" }}>Redo</span>
           </FlexColumn>
@@ -211,7 +253,7 @@ class Lesson extends Component {
         </WritingPad>
         {showOverlay && (
           <Overlay>
-            <i class="far fa-check-circle" />
+            <i className="far fa-check-circle" />
             <Button onClick={this.handleClick}>Next</Button>
           </Overlay>
         )}
