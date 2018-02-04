@@ -34,17 +34,22 @@ const FlexRow = styled.div`
 
 const Overlay = styled.div`
   position: absolute;
-  top: 15%;
-  left: 35%;
-  right: 35%;
-  bottom: 15%;
+  top: 1rem;
+  left: 8rem;
+  right: 8rem;
+  bottom: 1rem;
   border: 1px solid black;
   z-index: 50;
   min-width: 9em;
-  min-height: 50%;
-  background-color: #efefef;
+  max-height: 28rem;
+  background-color: #f5f5f5;
   border: 1pv solid #efefef;
   font-size: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
 `;
 
 const Container = styled.div`
@@ -54,12 +59,10 @@ const Container = styled.div`
 `;
 
 const Button = styled.span`
-  display: block;
-  background-color: #2020e4;
-  opacity: 0.65;
+  background-color: #5858e8;
   border-radius: 5px;
-  font-size: 2em;
-  padding: 0.5rem;
+  font-size: 0.5em;
+  padding: 0.2rem 1rem;
   margin: 1rem;
   z-index: 10;
   a {
@@ -134,11 +137,13 @@ class Lesson extends Component {
   }
 
   handleClick = event => {
+    const currentLevel = this.state.currentLevel + 1;
+    console.log("increm>>>", currentLevel);
     // go to next level
-    this.setState(state => ({
-      currentLevel: ++state.currentLevel,
+    this.setState({
+      currentLevel,
       showOverlay: false
-    }));
+    });
 
     // clear canvas
     var editorElement = document.getElementById("editor");
@@ -150,7 +155,7 @@ class Lesson extends Component {
     const { lessonData, lessonNum, currentLevel } = this.state;
 
     if (lessonData.levels[currentLevel].chi === chars) {
-      console.log("MATCH!!");
+      
       this.setState({ showOverlay: true });
     }
   };
@@ -178,9 +183,11 @@ class Lesson extends Component {
     };
 
     const { lessonNum, lessonData, currentLevel, showOverlay } = this.state;
-
+    const canto = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[0] : null;
+    const man = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[1] : null;
+    
     return (
-      <div>
+      <div style={{position: "relative"}}>
       <Nav/>
       <Container>
         <Link to="/lessons">
@@ -211,7 +218,7 @@ class Lesson extends Component {
                   style={{ fontSize: "1.5em" }}
                   onClick={this.playAudio}
                 >
-                  <audio src={lessonData.levels[currentLevel].audio[0]} />
+                  <audio src={canto} />
                 </i>
               </div>
               <div>
@@ -222,7 +229,7 @@ class Lesson extends Component {
                   onClick={this.playAudio}
                 >
                   <audio
-                    src={lessonData.levels[currentLevel].audio[1]}
+                    src={man}
                     onClick={this.playAudio}
                   />
                 </i>
@@ -256,8 +263,9 @@ class Lesson extends Component {
         </WritingPad>
         {showOverlay && (
           <Overlay>
-            <i className="far fa-check-circle" />
-            <Button onClick={this.handleClick}>Next</Button>
+            <i className="far fa-check-circle" style={{color: "#ef5f4f", fontSize: "2em"}}/>
+            <span style={{color: "#ef5f4f", fontSize: "0.7em"}}>You got it!</span>
+            <Button onClick={this.handleClick} style={{color: "#fff"}}>Next</Button>
           </Overlay>
         )}
       </Container>

@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import * as navIconUrl from "./assets/nihao.png";
+import * as navIconUrl from "./assets/nihaothere.png";
 
 const Nav = props => 
   <nav>
