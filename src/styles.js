@@ -9,10 +9,9 @@ export const ImpactfulHeader = styled.header`
   * {
     padding: 0%;
     position: relative;
-    height: 12em;
+    height: 10em;
     left: 0px;
     width: 100%;
-    top: 10%;
   }
   *:first-child {
     margin: 0px;
