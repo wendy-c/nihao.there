@@ -8,8 +8,6 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname + '/../dist')));
-
 // CONNECT TO DB
 mongoose.connect('mongodb://localhost/test');
 
@@ -49,4 +47,4 @@ app.get('/lessons', function (req, res) {
 });
 
 app.listen(8000);
-console.log('Server started!');
+console.log('Server started on 8000!');
