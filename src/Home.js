@@ -30,8 +30,10 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
+
 export default class Home extends Component {
   render() {
+
     return(
         <div className="home-container">
           <Container>
@@ -41,12 +43,13 @@ export default class Home extends Component {
           <Footer>
           <Background color='red'>
           <ImpactfulHeader>
-            <h1>Ni hao! </h1>
-            <h2>你 好！</h2>
+            <h1>Ni hao there! </h1>
+            <div><h2>你 好！</h2></div>
           </ImpactfulHeader>
         </Background>
         </Footer>
         </div>
       );
+
   }
 }
