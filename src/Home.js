@@ -35,22 +35,22 @@ const Container = styled.div`
 export default class Home extends Component {
   render() {
 
-    return(
-        <div className="home-container">
-          <Container>
-          <img style={{maxWidth: "300px"}} src="./assets/nihaothere.png"/>
+    return (
+      <div className="home-container">
+        <Container>
+          <img style={{ maxWidth: "300px" }} src="./assets/nihaothere.png" />
           <Button><Link to="/lessons">Begin Lessons</Link></Button>
-          </Container>
-          <Footer>
+        </Container>
+        <Footer>
           <Background color='red'>
-          <ImpactfulHeader>
-            <div><h1>Ni hao!</h1></div>
-            <div><h2>你 好！</h2></div>
-          </ImpactfulHeader>
-        </Background>
+            <ImpactfulHeader>
+              <div><h1>Ni hao!</h1></div>
+              <div><h2>你 好！</h2></div>
+            </ImpactfulHeader>
+          </Background>
         </Footer>
-        </div>
-      );
+      </div>
+    );
 
   }
 }
