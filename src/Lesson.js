@@ -3,6 +3,7 @@ import * as MyScriptJS from "myscript/src/myscript";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import data from "./data";
+import Nav from "./Nav";
 
 const WritingPad = styled.div`
   display: flex;
@@ -179,6 +180,8 @@ class Lesson extends Component {
     const { lessonNum, lessonData, currentLevel, showOverlay } = this.state;
 
     return (
+      <div>
+      <Nav/>
       <Container>
         <Link to="/lessons">
           <i
@@ -258,6 +261,7 @@ class Lesson extends Component {
           </Overlay>
         )}
       </Container>
+      </div>
     );
   }
 }
