@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as MyScriptJS from 'myscript/src/myscript';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import data from "./data";
 
 const WritingPad = styled.div`
   display: flex;
@@ -12,60 +13,24 @@ const WritingPad = styled.div`
 const CharacterContainer = styled.div`
   display: flex;
   min-width: 500px;
-
+  justify-content: center;
 `;
-
-const data = [{  
-  lesson: 0,
-  title: "Animals",
-  levels: [{
-      eng: "Alpaca",
-      chi: "草泥馬",
-      gif: [
-        "http://bishun.strokeorder.info/characters/455589.gif", 
-        "http://bishun.strokeorder.info/characters/275165.gif",
-        "https://upload.wikimedia.org/wikipedia/commons/3/3a/%E9%A6%AC-order.gif"
-        ],
-      audio: []
-    }, {
-      eng: "Chicken",
-      chi: "草泥馬",
-      gif: [
-        "http://bishun.strokeorder.info/characters/455589.gif", 
-        "http://bishun.strokeorder.info/characters/275165.gif",
-        "https://upload.wikimedia.org/wikipedia/commons/3/3a/%E9%A6%AC-order.gif"
-        ],
-      audio: []
-    }, {
-      eng: "Cow",
-      chi: "草泥馬",
-      gif: [
-        "http://bishun.strokeorder.info/characters/455589.gif", 
-        "http://bishun.strokeorder.info/characters/275165.gif",
-        "https://upload.wikimedia.org/wikipedia/commons/3/3a/%E9%A6%AC-order.gif"
-        ],
-      audio: []
-    }, {
-      eng: "Pig",
-      chi: "草泥馬",
-      gif: [
-        "http://bishun.strokeorder.info/characters/455589.gif", 
-        "http://bishun.strokeorder.info/characters/275165.gif",
-        "https://upload.wikimedia.org/wikipedia/commons/3/3a/%E9%A6%AC-order.gif"
-        ],
-      audio: []
-    }, {
-      'Rabbit': {
-        chi: "",
-        gif: [],
-        audio: []
-      }
-    }]
-}];
 
 class Lesson extends Component {
   state = {
     currentLevel: 0
+  }
+
+  componentWillMount() {
+    
+    const lessonNum = this.props.location.pathname.slice(-1);
+    const lessonData = data[lessonNum - 1];
+    console.log(lessonData, "<<<DATA")
+    this.setState({
+      lessonNum,
+      lessonData
+    })
+
   }
 
   componentDidMount() {
@@ -94,12 +59,30 @@ class Lesson extends Component {
       }
     });
 
+    editorElement.addEventListener('exported', function (evt) {
+      var exports = evt.detail.exports;
+      console.log("EXPORTS>>>", exports)
+      if (exports && exports['text/plain']) {
+        this.exportedIsAnswer(exports);
+      } else {
+        // resultElement.innerHTML = '';
+      }
+    });
+
   }
 
   handleClick = event => {
     this.setState(state => ({
       currentLevel: state.currentLevel++
     }))
+  }
+
+  exportedIsAnswer = exports => {
+    const chars = exports['text/plain'];
+    const { lessonData } = this.state;
+    if (lessonData.chi === chars) {
+      console.log("MATCH!!")
+    }
   }
 
   render() {
@@ -111,21 +94,21 @@ class Lesson extends Component {
       'maxWidth': '100%'
     };
 
-    const lessonNum = this.props.location.pathname.slice(-1);
-    const lesson = data[lessonNum - 1];
-    const {currentLevel} = this.state;
+    const {lessonNum, lessonData, currentLevel} = this.state;
 
     return (
     <div>
     <Link to="/lessons" style={{float: "left"}}>Back</Link>
-    <h2>Lesson {lessonNum} - {lesson.title}</h2>
+    <h2>Lesson {lessonNum} - {lessonData.title}</h2>
     <CharacterContainer>
       <div>
-        <span styled={{padding: "1em"}}>{lesson.levels[currentLevel].chi}</span>
-        <span>{lesson.levels[currentLevel].eng}</span>
+        <h3>
+        <span styled={{padding: "1em"}}>{lessonData.levels[currentLevel].chi}</span>
+        <span>{lessonData.levels[currentLevel].eng}</span>
+        </h3>
       </div>
       <div>
-        {lesson.levels[currentLevel].gif.map(char => {
+        {lessonData.levels[currentLevel].gif.map(char => {
           return <img src={char} style={{width: "50px", height: "50px"}}/>
         })}
       </div>
