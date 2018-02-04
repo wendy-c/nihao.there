@@ -6,15 +6,16 @@ export const ImpactfulHeader = styled.header`
   letter-spacing: 1px;
   font-style: italic;
   color: white;
-  font-size: 80px;
+  font-size: 70px;
   * {
     padding: 0px;
     position: relative;
   }
   *:first-child {
-    margin: 5px 0px 0px 50px;
-    text-align: left;
-    left: 3px;
+
+    margin: 0px;
+    text-align: center;
+    left: 0px;
   }
   *:nth-child(2) {
     position: relative;
@@ -24,6 +25,9 @@ export const ImpactfulHeader = styled.header`
     left: 0px;
     box-shadow: 0px -5px 15px 6px white;
     * {
+      position: relative;
+      top: 10%;
+      color: blue;
       text-align: center;
       left: ${window.innerWidth}px;
       animation-direction: forward;
@@ -38,7 +42,7 @@ export const ImpactfulHeader = styled.header`
       transform: translate(0px);
     }
     to {
-      transform: translate(${-1 * window.innerWidth}px);
+      transform: translate(${-0.98 * window.innerWidth}px);
     }
   }
   `;
@@ -48,7 +52,7 @@ export const Background = styled.div`
     props => css`
       background-color: ${props.color};
       opacity: 0.65;
-      padding: 30px 0px 0px 0px;
+      padding: 20px 0px 0px 0px;
     `
   }
 `
