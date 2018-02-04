@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import * as MyScriptJS from 'myscript/src/myscript'
+import styled from "styled-components";
+
+const WritingPad = styled.div`
+  min-width: 500px;
+  min-height: 500px;
+`;
 
 class Lesson extends Component {
 
   componentDidMount() {
+
     var editorElement = document.getElementById('editor');
 
     MyScriptJS.register(this.refs.editor, {
@@ -31,10 +38,12 @@ class Lesson extends Component {
   }
 
   render() {
+
     const editorStyle = {
-    'minWidth': '500px',
-    'minHeight': '500px',
-  };
+      'minWidth': '500px',
+      'minHeight': '500px',
+    };
+
     return (
     <div>
     <h2>Lesson</h2>
