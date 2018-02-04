@@ -33,13 +33,6 @@ const data = [{
         "https://upload.wikimedia.org/wikipedia/commons/3/3a/%E9%A6%AC-order.gif"
         ],
       audio: []
-    },  
-    {
-      "Monkey": {
-        chi: "猴子",
-        gif: ["http://bishun.strokeorder.info/characters/790911.gif", ""],
-        audio: []
-      }
     }
   ]
 }];
