@@ -80,14 +80,13 @@ const PlayContainer = styled.div`
 class Lesson extends Component {
   state = {
     currentLevel: 0,
-    showOverlay: false,
+    showOverlay: false
   };
-
-  editor;
 
   componentWillMount() {
     const lessonNum = this.props.location.pathname.slice(-1);
     const lessonData = data[lessonNum - 1];
+
     this.setState({
       lessonNum,
       lessonData
@@ -95,12 +94,11 @@ class Lesson extends Component {
   }
 
   componentDidMount() {
-    // var editorElement = document.getElementById("editor");
+    var editorElement = document.getElementById("editor");
     const exportedIsAnswer = this.exportedIsAnswer;
-    this.editor = this.refs.editor;
-    
+
     MyScriptJS.register(
-      this.editor, //this.refs.editor,
+      this.refs.editor,
       {
         recognitionParams: {
           type: "TEXT",
@@ -125,8 +123,8 @@ class Lesson extends Component {
         }
       }
     );
-    this.editor.addEventListener("exported", function(evt) {
-    // editorElement.addEventListener("exported", function(evt) {
+
+    editorElement.addEventListener("exported", function(evt) {
       var exports = evt.detail.exports;
 
       if (exports && exports["text/plain"]) {
@@ -141,10 +139,10 @@ class Lesson extends Component {
       currentLevel: ++state.currentLevel,
       showOverlay: false
     }));
+
     // clear canvas
-    // var editorElement = document.getElementById("editor");
-    // editorElement.editor.clear();
-    this.editor.clear();
+    var editorElement = document.getElementById("editor");
+    editorElement.editor.clear();
   };
 
   exportedIsAnswer = exports => {
@@ -158,15 +156,13 @@ class Lesson extends Component {
   };
 
   handleUndo = event => {
-    // var editorElement = document.getElementById("editor");
-    // editorElement.editor.undo();
-    this.editor.undo();
+    var editorElement = document.getElementById("editor");
+    editorElement.editor.undo();
   };
 
   handleRedo = event => {
-    // var editorElement = document.getElementById("editor");
-    // editorElement.editor.redo();
-    this.editor.redo();
+    var editorElement = document.getElementById("editor");
+    editorElement.editor.redo();
   };
 
   playAudio = event => {
@@ -182,6 +178,7 @@ class Lesson extends Component {
     };
 
     const { lessonNum, lessonData, currentLevel, showOverlay } = this.state;
+
     return (
       <div>
       <Nav/>
@@ -255,7 +252,7 @@ class Lesson extends Component {
           </FlexColumn>
         </FlexRow>
         <WritingPad>
-          <div style={editorStyle} ref="editor" />
+          <div id="editor" style={editorStyle} ref="editor" />
         </WritingPad>
         {showOverlay && (
           <Overlay>
