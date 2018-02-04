@@ -37,7 +37,10 @@ const data = [{
     {
       "Monkey": {
         chi: "猴子",
-        gif: ["http://bishun.strokeorder.info/characters/790911.gif", ""],
+        gif: [
+          "http://bishun.strokeorder.info/characters/790911.gif",
+          "http://bishun.strokeorder.info/characters/927263.gif"
+        ],
         audio: []
       }
     }
