@@ -14,6 +14,7 @@ const CharacterContainer = styled.div`
   display: flex;
   min-width: 500px;
   justify-content: center;
+  align-items: center;
 `;
 
 class Lesson extends Component {
@@ -36,6 +37,7 @@ class Lesson extends Component {
   componentDidMount() {
 
     var editorElement = document.getElementById('editor');
+    const exportedIsAnswer = this.exportedIsAnswer;;
 
     MyScriptJS.register(this.refs.editor, {
       recognitionParams: {
@@ -63,7 +65,7 @@ class Lesson extends Component {
       var exports = evt.detail.exports;
       console.log("EXPORTS>>>", exports)
       if (exports && exports['text/plain']) {
-        this.exportedIsAnswer(exports);
+        exportedIsAnswer(exports);
       } else {
         // resultElement.innerHTML = '';
       }
@@ -78,6 +80,7 @@ class Lesson extends Component {
   }
 
   exportedIsAnswer = exports => {
+    console.log("IN exportedIsAnswer")
     const chars = exports['text/plain'];
     const { lessonData } = this.state;
     if (lessonData.chi === chars) {
@@ -101,11 +104,9 @@ class Lesson extends Component {
     <Link to="/lessons" style={{float: "left"}}>Back</Link>
     <h2>Lesson {lessonNum} - {lessonData.title}</h2>
     <CharacterContainer>
-      <div>
-        <h3>
-        <span styled={{padding: "1em"}}>{lessonData.levels[currentLevel].chi}</span>
-        <span>{lessonData.levels[currentLevel].eng}</span>
-        </h3>
+      <div style={{padding: "0 5em"}}>
+        <h1>{lessonData.levels[currentLevel].chi}</h1>
+        <h1>{lessonData.levels[currentLevel].eng}</h1>
       </div>
       <div>
         {lessonData.levels[currentLevel].gif.map(char => {

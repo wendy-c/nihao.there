@@ -7,20 +7,12 @@ import Lessons from "./Lessons";
 import Lesson from "./Lesson";
 import './App.css';
 import * as styles from './styles';
-import { ImpactfulHeader, Background } from './styles';
 
 class App extends Component {
 
   render() {
     return (
       <div className="App">
-        <Background color='red'>
-          <ImpactfulHeader>
-            <h1>Ni hao! </h1>
-            <h2>你 好！</h2>
-          </ImpactfulHeader>
-        </Background>
-
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Home} />
