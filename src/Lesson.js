@@ -85,15 +85,30 @@ class Lesson extends Component {
 
   componentWillMount() {
     const lessonNum = this.props.location.pathname.slice(-1);
-    const lessonData = data[lessonNum - 1];
+    // const lessonData = data[lessonNum - 1];
 
-    this.setState({
-      lessonNum,
-      lessonData
+    fetch('/localhost:8000/lesson').then(
+      response => response.json(),
+      error => {
+        console.error(error);
+        throw new Error(error);
+      }
+    ).then(lessons => {
+      console.log(lessons);
+      this.setState({
+        lessonNum,
+        lessonData: data[lessonNum - 1]
+      });
     });
+    
+    // this.setState({
+    //   lessonNum,
+    //   lessonData
+    // });
   }
 
   componentDidMount() {
+
     var editorElement = document.getElementById("editor");
     const exportedIsAnswer = this.exportedIsAnswer;
 
