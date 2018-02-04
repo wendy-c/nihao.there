@@ -6,6 +6,7 @@ export const ImpactfulHeader = styled.header`
   letter-spacing: -0.3em;
   font-style: italic;
   color: white;
+  
   * {
     padding: 0%;
     position: relative;
@@ -29,8 +30,8 @@ export const ImpactfulHeader = styled.header`
   }
   *:nth-child(2) {
     position: relative;
-    background-color: grey;
-    box-shadow: 0px -5px 15px 6px white;
+    // background-color: grey;
+    // box-shadow: 0px -5px 15px 6px white;
     *:first-child {
       position: relative;
       top: 10%;
@@ -67,9 +68,14 @@ export const ImpactfulHeader = styled.header`
 export const Background = styled.div`
   ${
     props => css`
-      background-color: ${props.color};
+      // background-color: ${props.color};
       opacity: 0.65;
       padding: 1em 0em 0em 0em;
+      background: #3a1c71; /* fallback for old browsers */
+      background: -webkit-linear-gradient(to bottom, #3a1c71, #d76d77, #ffaf7b); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to bottom, #3a1c71, #d76d77, #ffaf7b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
     `
   }
 `

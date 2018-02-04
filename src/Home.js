@@ -6,12 +6,11 @@ import * as logoUrl from "./assets/nihaothere.png";
 
 const Button = styled.span`
   display: block;
-  background-color: #2020e4;
-  opacity: 0.65;
+  background-color: #5858e8;
   border-radius: 5px;
-  font-size: 3em;
+  font-size: 2em;
   padding: 0.5rem;
-  margin: 1rem;
+  margin: 0.5rem;
   z-index: 10;
   a {
     text-decoration: none;
@@ -23,6 +22,11 @@ const Footer = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-height: 20rem;
+
+  @media(max-width: 800px) {
+    position: relative;
+  }
 `;
 
 const Container = styled.div`
@@ -33,9 +37,10 @@ const Container = styled.div`
 `;
 
 const SquishyContainer = Container.extend`
+max-height: 50%;
   @media screen and (orientation: portrait) {
     img {
-      width: 80%;
+      width: 30rem;
       position: relative;
       top: 20%;
     }
@@ -43,7 +48,7 @@ const SquishyContainer = Container.extend`
 
   @media screen and (orientation: landscape) {
     img { 
-      width: 35%;
+      width: 20rem;
     }
   }
 `
