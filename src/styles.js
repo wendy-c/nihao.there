@@ -10,30 +10,39 @@ export const ImpactfulHeader = styled.header`
   * {
     padding: 0px;
     position: relative;
+    height: 200px;
+    left: 0px;
+    width: ${window.innerWidth}px;
   }
   *:first-child {
-
     margin: 0px;
     text-align: center;
-    left: 0px;
+    *:first-child {
+      left: ${-1.2*window.innerWidth}px;
+      text-align: center;
+      animation-direction: forward;
+      animation-duration: 0.2s;
+      animation-name: slide-right;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
   }
   *:nth-child(2) {
     position: relative;
-    width: ${window.innerWidth}px;
-    height: 200px;
+    // width: ${window.innerWidth}px;
     background-color: grey;
-    left: 0px;
     box-shadow: 0px -5px 15px 6px white;
-    * {
+    *:first-child {
       position: relative;
       top: 10%;
       color: blue;
       text-align: center;
       left: ${window.innerWidth}px;
+      animation-delay: 0.2s;
       animation-direction: forward;
       animation-duration: 0.2s;
       animation-name: slide-left;
-      animation-timing-function: linear;
+      animation-timing-function: ease-in-out;
       animation-fill-mode: forwards;
     }
   }
@@ -42,7 +51,15 @@ export const ImpactfulHeader = styled.header`
       transform: translate(0px);
     }
     to {
-      transform: translate(${-0.98 * window.innerWidth}px);
+      transform: translate(${-0.8 * window.innerWidth}px);
+    }
+  }
+  @keyframes slide-right {
+    from {
+      transform: translate(0px);
+    }
+    to {
+      transform: translate(${window.innerWidth}px);
     }
   }
   `;
