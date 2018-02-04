@@ -22,7 +22,7 @@ export const ImpactfulHeader = styled.header`
       left: -120%;
       text-align: center;
       animation-direction: forward;
-      animation-duration: 0.2s;
+      animation-duration: 0.3s;
       animation-name: slide-right;
       animation-timing-function: ease-in-out;
       animation-fill-mode: forwards;
@@ -41,7 +41,7 @@ export const ImpactfulHeader = styled.header`
       left: 100%;
       animation-delay: 0.2s;
       animation-direction: forward;
-      animation-duration: 0.2s;
+      animation-duration: 0.3s;
       animation-name: slide-left;
       animation-timing-function: ease-in-out;
       animation-fill-mode: forwards;
