@@ -7,7 +7,7 @@
     "bower": "^1.8.2",
     "express": "^4.16.2",
     "mongoose": "^5.0.3",
-    "myscript": "^4.1.0",
+    "myscript": "git://github.com/MyScript/MyScriptJS.git#FIX-package",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
