@@ -11,6 +11,7 @@ const Button = styled.span`
   font-size: 2em;
   padding: 0.5rem;
   margin: 1rem;
+  z-index: 10;
   a {
     text-decoration: none;
     color: #fff;
