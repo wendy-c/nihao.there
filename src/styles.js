@@ -9,10 +9,9 @@ export const ImpactfulHeader = styled.header`
   * {
     padding: 0%;
     position: relative;
-    height: 12em;
+    height: 10em;
     left: 0px;
     width: 100%;
-    top: 10%;
   }
   *:first-child {
     margin: 0px;
@@ -22,7 +21,7 @@ export const ImpactfulHeader = styled.header`
       left: -120%;
       text-align: center;
       animation-direction: forward;
-      animation-duration: 0.2s;
+      animation-duration: 0.3s;
       animation-name: slide-right;
       animation-timing-function: ease-in-out;
       animation-fill-mode: forwards;
@@ -41,7 +40,7 @@ export const ImpactfulHeader = styled.header`
       left: 100%;
       animation-delay: 0.2s;
       animation-direction: forward;
-      animation-duration: 0.2s;
+      animation-duration: 0.3s;
       animation-name: slide-left;
       animation-timing-function: ease-in-out;
       animation-fill-mode: forwards;
