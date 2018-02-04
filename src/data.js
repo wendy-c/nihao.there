@@ -8,20 +8,29 @@ const data = [{
       gif: [
         "http://bishun.strokeorder.info/characters/492898.gif"
         ],
-      audio: []
+      audio: [ 
+        "http://www.nathanhammond.com/hackathon/cow.man.m4a",
+        "http://www.nathanhammond.com/hackathon/cow.canto.m4a"
+      ]
     },
     {
       "Dog": {
         chi: "狗",
         gif: ["http://bishun.strokeorder.info/characters/773610.gif"],
-        audio: []
+        audio: [
+          "http://www.nathanhammond.com/hackathon/dog.canto.m4a", 
+          "http://www.nathanhammond.com/hackathon/dog.man.m4a"
+        ]
       }
     }, 
     {
       "Snake": {
         chi: "蛇",
         gif: ["http://bishun.strokeorder.info/characters/503783.gif"],
-        audio: []
+        audio: [
+          "http://www.nathanhammond.com/hackathon/snake.canto.m4a",
+          "http://www.nathanhammond.com/hackathon/snake.man.m4a"
+        ]
       }
     },
     {
@@ -32,7 +41,10 @@ const data = [{
         "http://bishun.strokeorder.info/characters/275165.gif",
         "https://upload.wikimedia.org/wikipedia/commons/3/3a/%E9%A6%AC-order.gif"
         ],
-      audio: []
+      audio: [
+        "http://www.nathanhammond.com/hackathon/alpaca.canto.m4a", 
+        "http://www.nathanhammond.com/hackathon/alpaca.man.m4a"
+      ]
     }
   ]
 }];
