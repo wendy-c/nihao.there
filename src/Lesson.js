@@ -87,13 +87,40 @@ class Lesson extends Component {
   };
 
   componentWillMount() {
-    const lessonNum = this.props.location.pathname.slice(-1);
-    const lessonData = data[lessonNum - 1];
+    // const lessonNum = this.props.location.pathname.slice(-1);
+    // const lessonData = data[lessonNum - 1];
 
-    this.setState({
-      lessonNum,
-      lessonData
+    // this.setState({
+    //   lessonNum,
+    //   lessonData
+    // });
+
+    /**
+     * , function(error) {
+        console.error('Error: ', error);
+        throw new Error(error);
+      }
+     */
+
+    const lessonNum = this.props.location.pathname.slice(-1);
+    // const lessonData = data[lessonNum - 1];
+
+    fetch('/lessons').then(function(response) {
+        console.log('response: ', response);
+        return response.json();
+      }).then(function(lessons) {
+      console.log('Lessons: ', lessons);
+      this.setState({
+        lessonNum,
+        lessonData: lessons[lessonNum - 1]
+      });
     });
+    
+    // this.setState({
+    //   lessonNum,
+    //   lessonData
+    // });
+
   }
 
   componentDidMount() {
