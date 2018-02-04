@@ -9,8 +9,8 @@ const data = [{
         "http://bishun.strokeorder.info/characters/492898.gif"
         ],
       audio: [ 
-        "http://www.nathanhammond.com/hackathon/cow.man.m4a",
-        "http://www.nathanhammond.com/hackathon/cow.canto.m4a"
+        "http://www.nathanhammond.com/hackathon/cow.canto.m4a",
+        "http://www.nathanhammond.com/hackathon/cow.man.m4a"
       ]
     },
     {
