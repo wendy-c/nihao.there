@@ -15,18 +15,56 @@ const CharacterContainer = styled.div`
   min-width: 500px;
   justify-content: center;
   align-items: center;
+  padding-bottom: 3rem;
+`;
+
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const FlexRow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Overlay = styled.div`
   position: absolute;
-  top: 0;
+  top: 15%;
+  left: 35%;
+  right: 35%;
+  bottom: 15%;
   border: 1px solid black;
   z-index: 50;
-  min-width: 50%;
+  min-width: 9em;
   min-height: 50%;
-  background-color: #000;
+  background-color: #efefef;
   border: 1pv solid #efefef;
+  font-size: 3em;
+`;
+
+const Container = styled.div`
+  margin: 1rem 2rem;
+  position: "relative";
+  font-size: 1.3em;
+`;
+
+const Button = styled.span`
+  display: block;
+  background-color: #2020e4;
+  opacity: 0.65;
+  border-radius: 5px;
   font-size: 2em;
+  padding: 0.5rem;
+  margin: 1rem;
+  z-index: 10;
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
 `;
 
 class Lesson extends Component {
@@ -38,7 +76,7 @@ class Lesson extends Component {
   componentWillMount() {
     const lessonNum = this.props.location.pathname.slice(-1);
     const lessonData = data[lessonNum - 1];
-    console.log(lessonData, "<<<DATA");
+
     this.setState({
       lessonNum,
       lessonData
@@ -83,13 +121,21 @@ class Lesson extends Component {
         exportedIsAnswer(exports);
       }
     });
+
+
   }
 
   handleClick = event => {
+    
+    // go to next level
     this.setState(state => ({
       currentLevel: ++state.currentLevel,
       showOverlay: false
     }));
+
+    // clear canvas
+    var editorElement = document.getElementById("editor");
+    editorElement.editor.clear();
   };
 
   exportedIsAnswer = exports => {
@@ -100,6 +146,16 @@ class Lesson extends Component {
       console.log("MATCH!!");
       this.setState({ showOverlay: true });
     }
+  };
+
+  handleUndo = event => {
+    var editorElement = document.getElementById("editor");
+    editorElement.editor.undo();
+  };
+
+  handleRedo = event => {
+    var editorElement = document.getElementById("editor");
+    editorElement.editor.redo();
   };
 
   render() {
@@ -113,19 +169,23 @@ class Lesson extends Component {
     const { lessonNum, lessonData, currentLevel, showOverlay } = this.state;
 
     return (
-      <div style={{position: "relative"}}>
-        <Link to="/lessons" style={{ float: "left" }}>
-          Back
+      <Container>
+        <Link to="/lessons">
+          <i
+            className="far fa-hand-point-left"
+            style={{ height: "1rem", paddingRight: "0.5rem" }}
+          />
+          Back to Lessons
         </Link>
         <h2>
           Lesson {lessonNum} - {lessonData.title}
         </h2>
         <CharacterContainer>
-          <div style={{ padding: "0 5em" }}>
-            <h1>{lessonData.levels[currentLevel].chi}</h1>
-            <h1>{lessonData.levels[currentLevel].eng}</h1>
+          <div style={{ paddingRight: "2em" }}>
+            <div style={{fontSize: "1.5em"}}>{lessonData.levels[currentLevel].chi}</div>
+            <div style={{fontSize: "1.5em"}}>{lessonData.levels[currentLevel].eng}</div>
           </div>
-          <div>
+          <div style={{ paddingLeft: "2em" }}>
             {lessonData.levels[currentLevel].gif.map(char => {
               return (
                 <img src={char} style={{ width: "50px", height: "50px" }} />
@@ -133,17 +193,29 @@ class Lesson extends Component {
             })}
           </div>
         </CharacterContainer>
+        <FlexRow>
+          <FlexColumn
+            style={{ paddingRight: "12rem" }}
+            onClick={this.handleUndo}
+          >
+            <i className="fas fa-undo" />
+            <span style={{ fontSize: "0.6em" }}>Undo</span>
+          </FlexColumn>
+          <FlexColumn style={{ paddingLeft: "12rem" }} onClick={this.handleRedo}>
+            <i className="fas fa-redo" />
+            <span style={{ fontSize: "0.6em" }}>Redo</span>
+          </FlexColumn>
+        </FlexRow>
         <WritingPad>
-        <i className="fas fa-undo"></i>
           <div id="editor" style={editorStyle} ref="editor" />
         </WritingPad>
         {showOverlay && (
           <Overlay>
-            <div>check mark here</div>
-              <div onClick={this.handleClick}>Next</div>
+            <i class="far fa-check-circle" />
+            <Button onClick={this.handleClick}>Next</Button>
           </Overlay>
         )}
-      </div>
+      </Container>
     );
   }
 }
