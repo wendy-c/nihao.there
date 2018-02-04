@@ -70,13 +70,14 @@ const Button = styled.span`
 class Lesson extends Component {
   state = {
     currentLevel: 0,
-    showOverlay: false
+    showOverlay: false,
   };
+
+  editor;
 
   componentWillMount() {
     const lessonNum = this.props.location.pathname.slice(-1);
     const lessonData = data[lessonNum - 1];
-
     this.setState({
       lessonNum,
       lessonData
@@ -84,11 +85,12 @@ class Lesson extends Component {
   }
 
   componentDidMount() {
-    var editorElement = document.getElementById("editor");
+    // var editorElement = document.getElementById("editor");
     const exportedIsAnswer = this.exportedIsAnswer;
-
+    this.editor = this.refs.editor;
+    
     MyScriptJS.register(
-      this.refs.editor,
+      this.editor, //this.refs.editor,
       {
         recognitionParams: {
           type: "TEXT",
@@ -113,29 +115,26 @@ class Lesson extends Component {
         }
       }
     );
-
-    editorElement.addEventListener("exported", function(evt) {
+    this.editor.addEventListener("exported", function(evt) {
+    // editorElement.addEventListener("exported", function(evt) {
       var exports = evt.detail.exports;
 
       if (exports && exports["text/plain"]) {
         exportedIsAnswer(exports);
       }
     });
-
-
   }
 
   handleClick = event => {
-    
     // go to next level
     this.setState(state => ({
       currentLevel: ++state.currentLevel,
       showOverlay: false
     }));
-
     // clear canvas
-    var editorElement = document.getElementById("editor");
-    editorElement.editor.clear();
+    // var editorElement = document.getElementById("editor");
+    // editorElement.editor.clear();
+    this.editor.clear();
   };
 
   exportedIsAnswer = exports => {
@@ -149,13 +148,15 @@ class Lesson extends Component {
   };
 
   handleUndo = event => {
-    var editorElement = document.getElementById("editor");
-    editorElement.editor.undo();
+    // var editorElement = document.getElementById("editor");
+    // editorElement.editor.undo();
+    this.editor.undo();
   };
 
   handleRedo = event => {
-    var editorElement = document.getElementById("editor");
-    editorElement.editor.redo();
+    // var editorElement = document.getElementById("editor");
+    // editorElement.editor.redo();
+    this.editor.redo();
   };
 
   render() {
@@ -167,7 +168,6 @@ class Lesson extends Component {
     };
 
     const { lessonNum, lessonData, currentLevel, showOverlay } = this.state;
-
     return (
       <Container>
         <Link to="/lessons">
@@ -207,7 +207,7 @@ class Lesson extends Component {
           </FlexColumn>
         </FlexRow>
         <WritingPad>
-          <div id="editor" style={editorStyle} ref="editor" />
+          <div style={editorStyle} ref="editor" />
         </WritingPad>
         {showOverlay && (
           <Overlay>
