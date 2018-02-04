@@ -26,16 +26,16 @@ var lessonSchema = new Schema({
   levels: [{
     eng: String,
     chi: String,
-    gif: String[],
-    audio: String[]
+    gif: String,
+    audio: String
   }]
 });
 
 var Lesson = mongoose.model('Lesson', lessonSchema)
 
-Lesson.collection.insertMany(data, function (err, r) {
-  if (error) {
-    console.error(error);
+Lesson.collection.insert(data, function (err, r) {
+  if (err) {
+    console.error(err);
   } else {
     console.log(r.insertedCount + " has been saved!");
   }
