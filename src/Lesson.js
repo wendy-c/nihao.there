@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import * as MyScriptJS from "myscript/src/myscript";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import data from "./data";
-import Nav from "./Nav";
+import { withRouter } from "react-router";
 
 const WritingPad = styled.div`
   display: flex;
@@ -89,6 +89,11 @@ class Lesson extends Component {
   componentWillMount() {
     const lessonNum = this.props.location.pathname.slice(-1);
     const lessonData = data[lessonNum - 1];
+    
+    if (!lessonData) {
+      console.log("HISTORY", this.props.history)
+      this.props.history.push("/notfound");
+    }
 
     this.setState({
       lessonNum,
@@ -138,7 +143,7 @@ class Lesson extends Component {
 
   handleClick = event => {
     const currentLevel = this.state.currentLevel + 1;
-    console.log("increm>>>", currentLevel);
+    
     // go to next level
     this.setState({
       currentLevel,
@@ -175,6 +180,10 @@ class Lesson extends Component {
   };
 
   render() {
+
+    const { lessonNum, lessonData, currentLevel, showOverlay, redirect } = this.state;
+    const canto = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[0] : null;
+    const man = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[1] : null;
     const editorStyle = {
       minWidth: "500px",
       minHeight: "400px",
@@ -182,13 +191,9 @@ class Lesson extends Component {
       maxWidth: "100%"
     };
 
-    const { lessonNum, lessonData, currentLevel, showOverlay } = this.state;
-    const canto = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[0] : null;
-    const man = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[1] : null;
     
     return (
       <div style={{position: "relative"}}>
-      <Nav/>
       <Container>
         <Link to="/lessons">
           <i
@@ -274,4 +279,4 @@ class Lesson extends Component {
   }
 }
 
-export default Lesson;
+export default withRouter(Lesson);
