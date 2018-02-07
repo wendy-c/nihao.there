@@ -3,7 +3,6 @@ import * as MyScriptJS from "myscript/src/myscript";
 import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import data from "./data";
-import { withRouter } from "react-router";
 
 const WritingPad = styled.div`
   display: flex;
@@ -89,11 +88,6 @@ class Lesson extends Component {
   componentWillMount() {
     const lessonNum = this.props.location.pathname.slice(-1);
     const lessonData = data[lessonNum - 1];
-    
-    if (!lessonData) {
-      console.log("HISTORY", this.props.history)
-      this.props.history.push("/notfound");
-    }
 
     this.setState({
       lessonNum,
@@ -102,6 +96,14 @@ class Lesson extends Component {
   }
 
   componentDidMount() {
+    
+    if (this.state.lessonData) {
+      this.MyScriptSetup();
+    }
+
+  }
+
+  MyScriptSetup = () => {
     var editorElement = document.getElementById("editor");
     const exportedIsAnswer = this.exportedIsAnswer;
 
@@ -182,14 +184,17 @@ class Lesson extends Component {
   render() {
 
     const { lessonNum, lessonData, currentLevel, showOverlay, redirect } = this.state;
-    const canto = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[0] : null;
-    const man = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[1] : null;
+    
     const editorStyle = {
       minWidth: "500px",
       minHeight: "400px",
       border: "1px solid #000",
       maxWidth: "100%"
     };
+
+    if (!lessonData) {
+      return <Redirect to="/notfound"/>
+    }
 
     
     return (
@@ -223,7 +228,7 @@ class Lesson extends Component {
                   style={{ fontSize: "1.5em" }}
                   onClick={this.playAudio}
                 >
-                  <audio src={canto} />
+                  <audio src={lessonData.levels[currentLevel].audio[0]} />
                 </i>
               </div>
               <div>
@@ -234,7 +239,7 @@ class Lesson extends Component {
                   onClick={this.playAudio}
                 >
                   <audio
-                    src={man}
+                    src={lessonData.levels[currentLevel].audio[1]}
                     onClick={this.playAudio}
                   />
                 </i>
@@ -279,4 +284,4 @@ class Lesson extends Component {
   }
 }
 
-export default withRouter(Lesson);
+export default Lesson;
