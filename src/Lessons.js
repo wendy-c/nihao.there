@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Nav from "./Nav";
 
 const Container = styled.div`
   display: flex;
@@ -32,7 +31,6 @@ const LessonContainer = styled.ul`
 const Lessons = props => {
   return (
     <div>
-    <Nav/>
     <Container>
       <LessonContainer>
         <li>

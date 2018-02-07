@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import * as MyScriptJS from "myscript/src/myscript";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import data from "./data";
-import Nav from "./Nav";
 
 const WritingPad = styled.div`
   display: flex;
@@ -97,6 +96,14 @@ class Lesson extends Component {
   }
 
   componentDidMount() {
+    
+    if (this.state.lessonData) {
+      this.MyScriptSetup();
+    }
+
+  }
+
+  MyScriptSetup = () => {
     var editorElement = document.getElementById("editor");
     const exportedIsAnswer = this.exportedIsAnswer;
 
@@ -138,7 +145,7 @@ class Lesson extends Component {
 
   handleClick = event => {
     const currentLevel = this.state.currentLevel + 1;
-    console.log("increm>>>", currentLevel);
+    
     // go to next level
     this.setState({
       currentLevel,
@@ -175,6 +182,9 @@ class Lesson extends Component {
   };
 
   render() {
+
+    const { lessonNum, lessonData, currentLevel, showOverlay, redirect } = this.state;
+    
     const editorStyle = {
       minWidth: "500px",
       minHeight: "400px",
@@ -182,13 +192,13 @@ class Lesson extends Component {
       maxWidth: "100%"
     };
 
-    const { lessonNum, lessonData, currentLevel, showOverlay } = this.state;
-    const canto = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[0] : null;
-    const man = lessonData.levels[currentLevel].audio ? lessonData.levels[currentLevel].audio[1] : null;
+    if (!lessonData) {
+      return <Redirect to="/notfound"/>
+    }
+
     
     return (
       <div style={{position: "relative"}}>
-      <Nav/>
       <Container>
         <Link to="/lessons">
           <i
@@ -218,7 +228,7 @@ class Lesson extends Component {
                   style={{ fontSize: "1.5em" }}
                   onClick={this.playAudio}
                 >
-                  <audio src={canto} />
+                  <audio src={lessonData.levels[currentLevel].audio[0]} />
                 </i>
               </div>
               <div>
@@ -229,7 +239,7 @@ class Lesson extends Component {
                   onClick={this.playAudio}
                 >
                   <audio
-                    src={man}
+                    src={lessonData.levels[currentLevel].audio[1]}
                     onClick={this.playAudio}
                   />
                 </i>
