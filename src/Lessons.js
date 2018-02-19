@@ -4,12 +4,12 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
 `;
 
 const LessonContainer = styled.ul`
-  list-style-type: none;
+  list-style: none;
+  padding-left: 5%;
 
   li {
     margin: 0.5rem;
@@ -19,7 +19,7 @@ const LessonContainer = styled.ul`
     border-radius: 25px;
     font-weight: bold;
     text-align: left;
-    min-width: 60%;
+
   }
 
   a {
