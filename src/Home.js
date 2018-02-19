@@ -28,6 +28,7 @@ const Footer = styled.div`
   font-size: 0.6em;
   text-align: center;
   color: #000;
+  background-color: #fff;
 `;
 
 const Container = styled.div`

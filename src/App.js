@@ -11,6 +11,12 @@ import * as styles from './styles';
 
 class App extends Component {
 
+  componentWillMount() {
+    setInterval(function() {
+      fetch("https://salty-basin-32861.herokuapp.com/");
+    }, 300000);
+  }
+
   render() {
     
     return (
